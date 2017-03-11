@@ -8,7 +8,6 @@ module Intervals
   #
   # @author glennjgonzales <glennjgonzales@gmail.com>
   class Tree
-    include Enumerable
 
     attr_reader :node, :height, :balance
 
@@ -20,16 +19,11 @@ module Intervals
 
     # construct a map of interval to frequency, O(n)
     def repetitions(acc)
-      def accumulate(s, e, acc)
-        i = [s, e]
-        acc[i] = acc[i] ? acc[i] + 1 : 1
-      end
-
       if @node
-        i = [@node.start, @node.end]
-        acc[i] = acc[i] ? acc[i] + @node.count : @node.count
+        acc[[@node.start, @node.end]] = @node.count
         @node.xs.each do |_start, _end|
-          accumulate(_start, _end, acc)
+          i = [_start, _end]
+          acc[i] = acc[i] ? acc[i] + 1 : 1
         end
         @node.left.repetitions(acc)
         @node.right.repetitions(acc)

@@ -1,8 +1,20 @@
 require 'spec_helper'
 require 'intervals'
+require 'benchmark'
 
 # @author glennjgonzales <glennjgonzales@gmail.com>
 describe Intervals do
+
+  def gen_intervals(min, max, n)
+    rnd = Random.new
+    xs = []
+    n.times do
+      _start = rnd.rand(min..max)
+      _end = rnd.rand(_start..max)
+      xs << [_start, _end]
+    end
+    xs
+  end
 
   it "should accept a sequence of intervals to create a tree" do
     t = Intervals.make_tree([[1, 4], [5, 10], [8, 16]])
@@ -24,5 +36,14 @@ describe Intervals do
     result = Intervals.overlaps(xs)
     expect(result.size).to eq 2
     expect(result).to contain_exactly([1, 5], [6, 12])
+  end
+
+  it "can merge intervals fast" do
+    xs = gen_intervals(0, 1440, 100000)
+    expect(xs.size).to eq 100000
+    time = Benchmark.measure do
+      Intervals.overlaps(xs)
+    end
+    expect(time.total).to be < 4
   end
 end

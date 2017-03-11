@@ -25,12 +25,17 @@ module Intervals
       @xs = []
     end
 
+    def to_s
+      "<#{@start}, #{@end}>"
+    end
+
     def append(_start, _end)
       if @xs.empty?
-        xs[0] = [_start, _end]
+        xs << [_start, _end]
       else
-        idx = binary_search(@xs, _start)
+        idx = Intervals.binary_search(@xs, _start)
         if idx != -1
+          @xs.insert(idx, [_start, _end])
         elsif _start <= @xs[0][0]
           @xs = [[_start, _end]] + @xs
         else
