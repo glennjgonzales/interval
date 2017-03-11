@@ -16,7 +16,7 @@ module Intervals
       @balance = 0
     end
 
-    # construct a map of interval to frequency, O(n) 
+    # construct a map of interval to frequency, O(n)
     def repetitions(acc)
       def accumulate(s, e, acc)
         i = [s, e]
@@ -36,6 +36,7 @@ module Intervals
       acc
     end
 
+    # avl insertion, O(log n)
     def insert(_start, _end)
       if not @node
         @node = Node.new(_start, _end)
@@ -56,7 +57,7 @@ module Intervals
       end
     end
 
-    # given a point p, return the number of intervals in this tree that contain p
+    # given a point p, return the number of intervals in this tree that contain p, O(n)
     def num_intervals_that_contain(p, acc)
       total = 0
 
@@ -72,6 +73,7 @@ module Intervals
       acc + total
     end
 
+    # avl update height, O(1)
     def update_heights(recursive = true)
       if @node
         if recursive
@@ -84,6 +86,7 @@ module Intervals
       end
     end
 
+    # avl update height, O(1)
     def update_balances(recursive = true)
       if @node
         if recursive
@@ -96,6 +99,7 @@ module Intervals
       end
     end
 
+    # avl rotation, O(1)
     def rotate_right
       new_root = @node.left.node
       new_left_sub = new_root.right.node
@@ -111,6 +115,7 @@ module Intervals
       end
     end
 
+    # avl rotation, O(1)
     def rotate_left
       new_root = @node.right.node
       new_right_sub = new_root.left.node
@@ -126,6 +131,7 @@ module Intervals
       end
     end
 
+    # avl rebalance, O(1)
     def rebalance
       update_heights(recursive = false)
       update_balances(recursive = false)
