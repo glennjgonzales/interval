@@ -14,4 +14,7 @@ describe Intervals::Tree do
     expect(result.size).to eq 1
     expect(result.keys[0]).to eq [1, 50]
   end
+
+  it "should return a set of intervals obtained from merging overlapping intervals in this tree" do
+  end
 end
