@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'intervals'
 
-
+# @author glennjgonzales <glennjgonzales@gmail.com>
 describe Intervals::Tree do
 
   it "should return the intervals that are repeated a given number of times" do

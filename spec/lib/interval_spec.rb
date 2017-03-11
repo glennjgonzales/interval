@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'intervals'
 
-
+# @author glennjgonzales <glennjgonzales@gmail.com>
 describe Intervals do
 
   it "should accept a sequence of intervals to create a tree" do

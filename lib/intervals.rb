@@ -1,4 +1,5 @@
 
+# @author glennjgonzales <glennjgonzales@gmail.com>
 module Intervals
 
   # search for _start in the (ordered) sequence of pairs xs, O(log n)

@@ -5,6 +5,8 @@ module Intervals
   #
   # there's also an avl tree here:
   #   https://github.com/nahi/avl_tree/blob/master/lib/avl_tree.rb
+  #
+  # @author glennjgonzales <glennjgonzales@gmail.com>
   class Tree
     include Enumerable
 
