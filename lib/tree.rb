@@ -16,6 +16,7 @@ module Intervals
       @balance = 0
     end
 
+    # construct a map of interval to frequency, O(n) 
     def repetitions(acc)
       def accumulate(s, e, acc)
         i = [s, e]
@@ -55,6 +56,7 @@ module Intervals
       end
     end
 
+    # given a point p, return the number of intervals in this tree that contain p
     def num_intervals_that_contain(p, acc)
       total = 0
 

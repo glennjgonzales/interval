@@ -8,13 +8,9 @@ describe Intervals::Tree do
     t = Intervals.make_tree([[1, 50], [1, 50], [1, 50], [70, 100], [80, 90]])
     repeats = t.repetitions({})
     n = 3
-    result = repeats.select do |i, count|
-      count == n
-    end
+    result = repeats.select { |i, count| count == n }
     expect(result.size).to eq 1
-    expect(result.keys[0]).to eq [1, 50]
+    expect(result.keys).to contain_exactly([1, 50])
   end
 
-  it "should return a set of intervals obtained from merging overlapping intervals in this tree" do
-  end
 end

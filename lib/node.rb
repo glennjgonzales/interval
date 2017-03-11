@@ -1,5 +1,12 @@
 module Intervals
 
+  # a node in a tree.
+  #
+  # avl tree implementation originally from here:
+  #   http://blog.coder.si/2014/02/how-to-implement-avl-tree-in-python.html
+  #
+  # there's also an avl tree here:
+  #   https://github.com/nahi/avl_tree/blob/master/lib/avl_tree.rb
   class Node
     attr_reader :start, :end, :xs
     attr_accessor :count, :size
@@ -30,6 +37,7 @@ module Intervals
       end
     end
 
+    # given a point p, return the number of intervals in this node that contain p
     def num_intervals_that_contain(p)
       if p == @start
         @xs.length

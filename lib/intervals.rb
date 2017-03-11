@@ -1,6 +1,7 @@
 
 module Intervals
 
+  # search for _start in the (ordered) sequence of pairs xs, O(log n)
   def self.binary_search(xs, _start)
     left, right = 0, xs.length - 1
     while right - left >= 0
@@ -18,6 +19,7 @@ module Intervals
     -1
   end
 
+  # Construct an avl tree out of the given sequence of pairs (intervals), O(nlog n)
   def self.make_tree(ys)
     t = Tree.new
     ys.each do |y|
@@ -27,7 +29,7 @@ module Intervals
     t
   end
 
-  # Subtract interval y from x as sets: A - B = all x in A that are not in B
+  # Subtract interval y from x as sets: A - B = all x in A that are not in B, O(1)
   def self.subtract(x, y)
     x1, x2 = x[0], x[1]
     y1, y2 = y[0], y[1]
@@ -41,6 +43,7 @@ module Intervals
     end
   end
 
+  # greedy algorithm for merging the intervals, O(nlog n) because of sorting
   def self.overlaps(xs)
     xs.sort! { |x, y| x[0] <=> y[0] }
     r = []
