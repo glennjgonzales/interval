@@ -50,5 +50,8 @@ describe Intervals do
   it "can provide a set of non-overlapping intervals given an initial interval" do
     xs = [[480, 540], [600, 675], [660, 750], [780, 870]]
     t = Intervals.make_tree(xs)
+    # find the given interval in the tree
+    # traverse the tree, collecting all intervals that don't conflict with the accumulator
+    skip # actually pending but we don't want it to count as failed
   end
 end
