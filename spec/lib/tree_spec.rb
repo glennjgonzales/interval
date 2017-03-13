@@ -18,15 +18,15 @@ describe Intervals::Tree do
 
   it "should return the intervals that are repeated a given number of times" do
     t = Intervals.make_tree([[1, 50], [1, 50], [1, 50], [70, 100], [80, 90]])
-    repeats = t.repetitions({})
+    f_map = t.frequency_map({})
     n = 3
-    result = repeats.select { |i, count| count == n }
+    result = f_map.select { |i, count| count == n }
     expect(result.size).to eq 1
     expect(result.keys).to contain_exactly([1, 50])
 
     t = Intervals.make_tree([[1, 10], [1, 10], [1, 10], [1, 10], [1, 10]])
-    repeats = t.repetitions({})
-    result = repeats.select { |i, count| count == 5 }
+    f_map = t.frequency_map({})
+    result = f_map.select { |i, count| count == 5 }
     expect(result.keys).to contain_exactly([1, 10])
   end
 
@@ -36,7 +36,7 @@ describe Intervals::Tree do
     f_map = {}
     time = Benchmark.measure do
       t = Intervals.make_tree(xs)
-      f_map = t.repetitions({})
+      f_map = t.frequency_map({})
     end
 
     expect(f_map.values.reduce(:+)).to eq 100000

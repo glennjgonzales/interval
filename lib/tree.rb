@@ -18,15 +18,15 @@ module Intervals
     end
 
     # construct a map of interval to frequency, O(n)
-    def repetitions(acc)
+    def frequency_map(acc)
       if @node
         acc[[@node.start, @node.end]] = @node.count
         @node.xs.each do |_start, _end|
           i = [_start, _end]
           acc[i] = acc[i] ? acc[i] + 1 : 1
         end
-        @node.left.repetitions(acc)
-        @node.right.repetitions(acc)
+        @node.left.frequency_map(acc)
+        @node.right.frequency_map(acc)
       end
 
       acc

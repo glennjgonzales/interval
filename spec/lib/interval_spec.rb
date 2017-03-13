@@ -46,4 +46,9 @@ describe Intervals do
     end
     expect(time.total).to be < 4
   end
+
+  it "can provide a set of non-overlapping intervals given an initial interval" do
+    xs = [[480, 540], [600, 675], [660, 750], [780, 870]]
+    t = Intervals.make_tree(xs)
+  end
 end
