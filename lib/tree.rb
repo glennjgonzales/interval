@@ -9,7 +9,7 @@ module Intervals
   # @author glennjgonzales <glennjgonzales@gmail.com>
   class Tree
 
-    attr_reader :node, :height, :balance
+    attr_accessor :node, :height, :balance
 
     def initialize
       @node = nil
@@ -20,7 +20,8 @@ module Intervals
     # construct a map of interval to frequency, O(n)
     def frequency_map(acc)
       if @node
-        acc[[@node.start, @node.end]] = @node.count
+        n = [@node.start, @node.end]
+        acc[n] = acc[n] ? acc[n] + @node.count : @node.count
         @node.xs.each do |_start, _end|
           i = [_start, _end]
           acc[i] = acc[i] ? acc[i] + 1 : 1
@@ -28,7 +29,6 @@ module Intervals
         @node.left.frequency_map(acc)
         @node.right.frequency_map(acc)
       end
-
       acc
     end
 
@@ -51,6 +51,7 @@ module Intervals
           @node.append(_start, _end)
         end
       end
+      rebalance
     end
 
     # given a point p, return the number of intervals in this tree that contain p, O(n)

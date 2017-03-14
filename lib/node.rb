@@ -26,7 +26,7 @@ module Intervals
     end
 
     def to_s
-      "<#{@start}, #{@end}>"
+      "<#{@start}, #{@end} x#{@count}>"
     end
 
     def append(_start, _end)

@@ -21,7 +21,6 @@ describe Intervals::Tree do
     f_map = t.frequency_map({})
     n = 3
     result = f_map.select { |i, count| count == n }
-    expect(result.size).to eq 1
     expect(result.keys).to contain_exactly([1, 50])
 
     t = Intervals.make_tree([[1, 10], [1, 10], [1, 10], [1, 10], [1, 10]])
@@ -31,16 +30,19 @@ describe Intervals::Tree do
   end
 
   it "should return the interval frequency map fast" do
-    xs = gen_intervals(0, 1440, 100000)
-    expect(xs.size).to eq 100000
+    size = 100000
+    xs = gen_intervals(0, 1440, size)
+    expect(xs.size).to eq size
     f_map = {}
+    t = nil
     time = Benchmark.measure do
       t = Intervals.make_tree(xs)
       f_map = t.frequency_map({})
     end
 
-    expect(f_map.values.reduce(:+)).to eq 100000
-    expect(time.total).to be < 4
+    puts "\nDone in #{'%.2f' % time.total}s"
+    expect(f_map.values.reduce(:+)).to eq size
+    expect(time.total).to be < 8
   end
 
 end
