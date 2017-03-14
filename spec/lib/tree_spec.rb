@@ -40,9 +40,9 @@ describe Intervals::Tree do
       f_map = t.frequency_map({})
     end
 
-    puts "\nDone in #{'%.2f' % time.total}s"
+    puts "\nfreqmap done in #{'%.2f' % time.total}s"
     expect(f_map.values.reduce(:+)).to eq size
-    expect(time.total).to be < 8
+    expect(time.total).to be < 4
   end
 
 end

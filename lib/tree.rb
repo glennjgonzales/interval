@@ -17,6 +17,16 @@ module Intervals
       @balance = 0
     end
 
+    def to_ary(acc = [])
+      if @node
+        @node.count.times { acc << [@node.start, @node.end] }
+        acc += @node.xs
+        @node.left.to_ary(acc)
+        @node.right.to_ary(acc)
+      end
+      acc
+    end
+
     # construct a map of interval to frequency, O(n)
     def frequency_map(acc)
       if @node
@@ -50,6 +60,19 @@ module Intervals
         else
           @node.append(_start, _end)
         end
+      end
+      rebalance
+    end
+
+    def insert_no_conflict(_start, _end)
+      if not @node
+        @node = Node.new(_start, _end)
+        @node.left = Tree.new
+        @node.right = Tree.new
+      elsif _end < @node.start
+        @node.left.insert_no_conflict(_start, _end)
+      elsif @node.end < _start
+        @node.right.insert_no_conflict(_start, _end)
       end
       rebalance
     end

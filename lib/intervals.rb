@@ -30,6 +30,15 @@ module Intervals
     t
   end
 
+  def self.make_tree_no_conflict(ys)
+    t = Tree.new
+    ys.each do |y|
+      _start, _end = y[0], y[1]
+      t.insert_no_conflict(_start, _end)
+    end
+    t
+  end
+
   # Subtract interval y from x as sets: A - B = all x in A that are not in B, O(1)
   def self.subtract(x, y)
     x1, x2 = x[0], x[1]
