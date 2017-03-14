@@ -90,12 +90,15 @@ describe Intervals do
         t = Intervals.make_tree_no_conflict(xs)
         non_overlap << t.to_ary
         h = xs.shift
-        #puts "xs - #{xs} - h - #{h}"
         xs += [h]
       end
     end
-    expect(non_overlap.size).to eq size
     puts "\nallnoconflicts done in #{'%.2f' % time.total}s"
     expect(time.total).to be < 4
+    expect(non_overlap.size).to eq size
+    non_overlap.each do |rs|
+      ms = Intervals.overlaps(rs)
+      expect(ms).to match_array rs
+    end
   end
 end
